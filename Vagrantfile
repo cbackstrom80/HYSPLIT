@@ -5,7 +5,7 @@ Vagrant.configure("2") do |config|
     vb.cpus = "2"
   end
   config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "pysplit-playbook.yml" # Change to your Ansible playbook file name
+    ansible.playbook = "playbooks/hysplit-playbook.yml" # Change to your Ansible playbook file name
   end
   
 end

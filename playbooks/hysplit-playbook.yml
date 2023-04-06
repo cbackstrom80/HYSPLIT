@@ -24,21 +24,10 @@
         name: bottle
         executable: pip3
 
-
-### INSTALL PYSPLIT AND DEPENDENCIES
-
-    - name: Install PySplit  using the 'pip3.3' executable
-      ansible.builtin.pip:
-        name: pysplit
-        executable: pip3
-
-
-  # UFW Configuration
-    - name: "UFW - Allow HTTP on port {{ http_port }}"
-      ufw:
-        rule: allow
-        port: "{{ http_port }}"
-        proto: tcp
-      tags: [ system ]
+    - name: Download HySplit
+      get_url:
+        url: https://www.ready.noaa.gov/data/web/models/hysplit4/linux_trial/hysplit.v5.2.3_UbuntuOS20.04.4LTS_public.tar.gz
+        dest: /tmp/hysplit.v5.2.3_UbuntuOS20.04.4LTS_public.tar.gz
+      register: hysplit
 
 
