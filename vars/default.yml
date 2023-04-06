@@ -1,0 +1,14 @@
+---
+#System Settings
+php_modules: [ 'php-curl', 'php-gd', 'php-mbstring', 'php-xml', 'php-xmlrpc', 'php-soap', 'php-intl', 'php-zip' ]
+hysplit_things: ['gfortran','gcc']
+#MySQL Settings
+mysql_root_password: "mysql_root_password"
+mysql_db: "wordpress"
+mysql_user: "cbackstrom"
+mysql_password: "R3d33m3r"
+
+#HTTP Settings
+http_host: "mooncasterlocal"
+http_conf: "mooncaster.local.conf"
+http_port: "80"

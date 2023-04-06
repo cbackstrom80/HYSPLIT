@@ -1,0 +1,44 @@
+#########################################################
+# DO Community Playbooks: Wordpress on Ubuntu 18.04 LAMP
+#########################################################
+---
+- hosts: all
+  become: true
+  vars_files:
+    - vars/default.yml
+
+  tasks:
+    - name: Install prerequisites
+      apt: name=aptitude update_cache=yes state=latest force_apt_get=yes
+      tags: [ system ]
+
+
+    - name: Install HySplit Things
+      apt: name={{ item }} update_cache=yes state=latest
+      loop: "{{ hysplit_things }}"
+      tags: [ system ]
+
+      
+    - name: Install bottle using the 'pip3.3' executable
+      ansible.builtin.pip:
+        name: bottle
+        executable: pip3
+
+
+### INSTALL PYSPLIT AND DEPENDENCIES
+
+    - name: Install PySplit  using the 'pip3.3' executable
+      ansible.builtin.pip:
+        name: pysplit
+        executable: pip3
+
+
+  # UFW Configuration
+    - name: "UFW - Allow HTTP on port {{ http_port }}"
+      ufw:
+        rule: allow
+        port: "{{ http_port }}"
+        proto: tcp
+      tags: [ system ]
+
+
