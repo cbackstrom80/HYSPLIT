@@ -19,15 +19,22 @@
       tags: [ system ]
 
       
-    - name: Install bottle using the 'pip3.3' executable
-      ansible.builtin.pip:
-        name: bottle
-        executable: pip3
 
     - name: Download HySplit
       get_url:
         url: https://www.ready.noaa.gov/data/web/models/hysplit4/linux_trial/hysplit.v5.2.3_UbuntuOS20.04.4LTS_public.tar.gz
         dest: /tmp/hysplit.v5.2.3_UbuntuOS20.04.4LTS_public.tar.gz
       register: hysplit
+    
 
+    - name: Unpack HySplit
+      unarchive:
+        src: /tmp/hysplit.v5.2.3_UbuntuOS20.04.4LTS_public.tar.gz
+        dest: ~/
+        remote_src: True
+
+    
+    - name: Build the default target
+      make:
+        chdir: /root/hysplit.v5.2.3_UbuntuOS20.04.4LTS_public
 
