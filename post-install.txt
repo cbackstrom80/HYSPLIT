@@ -1,0 +1,13 @@
+#Fixup DNS. Currently resolv.conf contains: 
+nameserver 168.63.129.16
+
+#Install Blobfuse (Consolidated from https://learn.microsoft.com/en-us/azure/storage/blobs/storage-how-to-mount-container-linux?tabs=RHEL#install-blobfuse-v1-on-linux) 
+  sudo rpm -Uvh https://packages.microsoft.com/config/rhel/8/packages-microsoft-prod.rpm
+  sudo mkdir /mnt/ramdisk
+  sudo mount -t tmpfs -o size=16g tmpfs /mnt/ramdisk
+  sudo mkdir /mnt/ramdisk/blobfusetmp
+  sudo chown <youruser> /mnt/ramdisk/blobfusetmp
+
+  # TEMP SSD STORAGE FOR BLOB (FROM THE DOCS)
+  sudo mkdir /mnt/resource/blobfusetmp -p
+  sudo chown <youruser> /mnt/resource/blobfusetmp
